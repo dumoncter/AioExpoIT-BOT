@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="main.css">
     <title>Title</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
 </head>
 <body>
 <form action='' class='form'>
@@ -11,13 +12,13 @@
     <label class='label' for='select'>Выберете Zywall</label>
     <select class='select' id='select'>
       <option selected value=''>IP адрес</option>
-      <option value='ceo'>Котельники - 192.168.200.1</option>
-      <option value='front-end'>Гольяново - 192.168.20.1</option>
-      <option value='back-end'>Ростов-на-Дону 192.168.10.1</option>
-      <option value='back-end'>Санкт-Петербург - 192.168.40.1</option>
-      <option value='back-end'>Воронеж - 192.168.30.1</option>
-      <option value='back-end'>Казань - 192.168.90.1</option>
-      <option value='back-end'>Ярославль - 192.168.120.1</option>
+      <option value='kot'>Котельники - 192.168.200.1</option>
+      <option value='gol'>Гольяново - 192.168.20.1</option>
+      <option value='rostov'>Ростов-на-Дону 192.168.10.1</option>
+      <option value='spb'>Санкт-Петербург - 192.168.40.1</option>
+      <option value='vor'>Воронеж - 192.168.30.1</option>
+      <option value='kaz'>Казань - 192.168.90.1</option>
+      <option value='yar'>Ярославль - 192.168.120.1</option>
     </select>
   </p>
   <p class='field required half'>
@@ -65,6 +66,15 @@
   <p class='field half'>
     <input class='button' type='submit' value='Отправить'>
   </p>
+  <script>
+    let tg = window.Telegram.WebApp;
+    let form = document.getElementsByClassName('form');
+    let button = document.getElementsByClassName('button');
+
+    button.addEventListener('click', () => {
+        tg.close()
+    });
+  </script>
 </form>
 </body>
 </html>

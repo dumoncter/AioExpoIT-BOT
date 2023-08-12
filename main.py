@@ -1,13 +1,13 @@
 import asyncio
 from aiogram import executor, Dispatcher
 from create_bot import dp
-from handlers import zywall, start_bot, zkt, nettols_main, zkt_sql_list
+from handlers import zywall, start_bot, zkt, net_tols_main, zkt_sql_list
 
 # all registered handlers:
 start_bot.start_bot(dp)
 zywall.register_handler_zywall(dp)
 zkt.register_handler_zkt(dp)
-nettols_main.register_handler_nettols(dp)
+net_tols_main.register_handler_net_tols(dp)
 
 
 async def on_startup_launch(dp: Dispatcher):

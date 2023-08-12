@@ -21,13 +21,12 @@ async def event_verification(message: types.Message) -> None:
     await message.reply("<b>Для работы необходимо узнать требуемый ID сканера.</b>\n"
                         "Найдите требуемый из списка.\n"
                         "<u>Если ID уже известен, переходите <b>далее - 'Отметить'</b></u>",
-                        reply_markup=zkt_event_vf, parse_mode=types.ParseMode.HTML)
+                        reply_markup=zkt_event_vf)
 
 
 async def search_zkt_id(message: types.Message) -> None:
-    await message.answer(open_file(), parse_mode=types.ParseMode.HTML)
-    await message.answer("❗ <u><b>Повторное использование через минуту</b></u>", reply_markup=zkt_event_vf_id_close,
-                         parse_mode=types.ParseMode.HTML)
+    await message.answer(open_file())
+    await message.answer("❗ <u><b>Повторное использование через минуту</b></u>", reply_markup=zkt_event_vf_id_close)
 
 
 def open_file():
@@ -44,7 +43,7 @@ async def notice(message: types.Message, state: FSMContext):
     await message.reply("✅ Укажите, через пробел: \n"
                         "<b>1 - ID сканера</b> и 2 - <b>ID учетной записи</b> на котором проводится проверка. \n"
                         "Пример: "
-                        "<b>930 57</b>", reply_markup=zkt_event_vf_id_close, parse_mode=types.ParseMode.HTML)
+                        "<b>930 57</b>", reply_markup=zkt_event_vf_id_close)
     await state.set_state(ClientState.INJECT_MAIN)
 
 
@@ -53,17 +52,17 @@ async def func_inject(message: types.Message, state: FSMContext):
     formated = user_msg.split()
     await state.update_data(INJECT_MAIN=user_msg)
     if user_msg.isalpha():
-        await message.reply('⛔ Сообщение не может содержать буквы .\n', parse_mode=types.ParseMode.HTML)
+        await message.reply('⛔ Сообщение не может содержать буквы .\n')
     elif len(formated) >= 3:
         await message.reply('⛔ Сообщение не может содержать более двух аргументов .\n'
                             'Пример: ID учетной записи: <b>1450</b>, ID сканера: <b>48</b>\n'
-                            '<b><u>1450 48</u></b>', parse_mode=types.ParseMode.HTML)
+                            '<b><u>1450 48</u></b>')
     elif len(message.text) > 8:
         await message.reply('⛔ Не корректный ввод.\n'
                             'ID учетной записи может содержать <b>более 9999</b> номеров\n'
                             'ID сканера не более <b>999</b>\n'
                             'Пример: ID учетной записи: <b>1450</b>, ID сканера: <b>48</b>\n'
-                            '<b><u>1450 48</u></b>', parse_mode=types.ParseMode.HTML)
+                            '<b><u>1450 48</u></b>')
     elif not user_msg:
         await message.reply('Сообщение не может быть пустым')
     else:
@@ -74,7 +73,7 @@ async def func_inject(message: types.Message, state: FSMContext):
                              f' запроc выполнен успешно!</b>{newline}'
                              f'<b>ID сканера: <u>{formated[0]}{newline}</u></b>'
                              f'Установлен <b>ID пользователя: <u>{formated[1]}</u></b>',
-                             parse_mode=types.ParseMode.HTML, reply_markup=main_kb)
+                             reply_markup=main_kb)
         await state.finish()
 
 

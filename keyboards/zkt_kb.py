@@ -3,8 +3,9 @@ from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
 
 zkt_main_btn_1 = KeyboardButton('Проверка события')
 zkt_main_btn_2 = KeyboardButton('Пока не известно')
-zkt_main = ReplyKeyboardMarkup(resize_keyboard=True)
-zkt_main.add(zkt_main_btn_1, zkt_main_btn_2)
+zkt_main_btn_3= KeyboardButton('В главное меню')
+zkt_main = ReplyKeyboardMarkup(resize_keyboard=True, row_width=2)
+zkt_main.add(zkt_main_btn_1, zkt_main_btn_2, zkt_main_btn_3)
 
 # event verification
 zkt_event_vf_btn1 = KeyboardButton('Вернуться выше')

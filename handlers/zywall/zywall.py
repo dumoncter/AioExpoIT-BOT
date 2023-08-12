@@ -1,8 +1,7 @@
 from aiogram import types, Dispatcher, filters
 from aiogram.dispatcher.filters.state import State, StatesGroup
 from aiogram.dispatcher import FSMContext
-from keyboards import zywall_main
-
+from keyboards import zywall_main, mac_web
 
 # FSM States
 class ClientState(StatesGroup):
@@ -10,19 +9,23 @@ class ClientState(StatesGroup):
 
 
 async def zywall_ip(message: types.Message, state: FSMContext):
-    await state.set_state(ClientState.IP)
-    await message.reply("Укажите IP:", reply_markup=zywall_main)
+    await message.reply(f"☑️ Утилита для работы с сетевыми устройствами.\n"
+                        f"<b>Что умеет?</b>\n"
+                        f"🔹 Искать и привязывать <b>MAC адреса</b>\n"
+                        f"🔹 Добавлять найденные устройства в <b>Zabbix</b>",
+                        reply_markup=mac_web)
+    # await state.set_state(ClientState.IP)
+    # await message.reply("Укажите IP:", reply_markup=zywall_main)
 
 
-
-async def zywall_mac(message: types.Message):
-    await message.reply("", reply_markup=zywall_main)
-    await message.reply("""
-            <b> Ваш IP Zywall </b>
-            """)
-    await message.reply(
-        f'Введите <b>4</> последние буквы или <b>полный</b>'
-        f'MAC в формате: <b>1Х:ЕР</b>', )
+# async def zywall_mac(message: types.Message):
+#     await message.reply("", reply_markup=zywall_main)
+#     await message.reply("""
+#             <b> Ваш IP Zywall </b>
+#             """)
+#     await message.reply(
+#         f'Введите <b>4</> последние буквы или <b>полный</b>'
+#         f'MAC в формате: <b>1Х:ЕР</b>', )
 
 
 # # @dp.message_handler(commands=['start', 'help'])
