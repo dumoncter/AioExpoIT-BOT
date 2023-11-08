@@ -1,5 +1,4 @@
 import pyodbc
-import asyncio
 from datetime import datetime
 from sys import platform
 import os
@@ -34,6 +33,6 @@ async def sql_inject(id_zkt, id_user) -> None:
         print(f'{datetime.now().strftime("%m/%d/%Y %H:%M:%S")} Запрос ID = {id_zkt}, User = {id_user} выполнен успешно!')
     except pyodbc.Error as err:
         print(datetime.now().strftime("%m/%d/%Y %H:%M:%S"), 'Error', err)
-    finally:
-        cursor.close()
-        conn.close()
+    # finally:
+    #     cursor.close()
+    #     conn.close()

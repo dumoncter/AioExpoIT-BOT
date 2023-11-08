@@ -1,6 +1,12 @@
+import time
+
 from aiogram import types, Dispatcher, filters
 from keyboards import main_kb, inline_main
 from aiogram.dispatcher import FSMContext
+from create_bot import bot, storage, dp
+import subprocess
+import sys
+import os
 import logging
 
 
@@ -21,6 +27,28 @@ async def start_cmd_handler(message: types.Message, state: FSMContext) -> None:
         await message.reply(f'Походу что-то сломалось\n {e}', reply_markup=main_kb)
 
 
+async def restart_bot(message: types.Message):
+    await message.reply(f'Выполняется перезагрузка БОТА\n')
+    # Закрытие текущего соединения с ботом
+    dp.stop_polling()
+    # Выполнение необходимых операций по перезагрузке
+    subprocess.call([sys.executable, os.path.join(os.getcwd(), __file__)])
+    # Запуск бота заново
+    await dp.start_polling()
+
+# async def restart_bot(message: types.Message):
+#     await message.reply(f'Выполняется перезагрузка БОТА\n')
+#     await bot.send_message(message.chat.id, 'Перезагрузка...')
+#     await bot.close()
+#     await main.close()
+#     await storage.close()
+#     await storage.wait_closed()
+#     await bot.delete_webhook()
+#     await bot.skip_updates()
+#     await dp.reset()
+
+
 def start_bot(dp: Dispatcher):
     dp.register_message_handler(start_cmd_handler, commands=['start', 'help'], state=None)
+    dp.register_message_handler(restart_bot, filters.Text(equals='Рестарт'))
     dp.register_message_handler(start_cmd_handler, filters.Text(equals='В главное меню', ignore_case=True), state='*')
