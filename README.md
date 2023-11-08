@@ -26,9 +26,11 @@ The bot has several commands that can be used to access its features:
 
 ## Requirements
 
-- Python v3.10
-- aiogram v3
-- dotenv v1
+- aiogram
+- dotenv
+- python-dotenv
+- netmiko
+- transliterate
 
 ## Installation
 
