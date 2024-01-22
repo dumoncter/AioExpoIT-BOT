@@ -1,6 +1,6 @@
 # AioExpoIT-BOT
 
-A simple structure for creating telegram bots using AIOgram 3.
+A simple structure for creating telegram bots using AIOgram 2.
 
 ---
 
